@@ -12,6 +12,9 @@ router.get('/hotels/:id', async (req, res) => {
         const hotels = JSON.parse(data);
         const hotel = hotels.find(h => h.id.toString() === hotelId); 
         if (hotel) {
+            if (!hotel.imageUrl) {
+                hotel.imageUrl = 'https://via.placeholder.com/350x200'; // Demo image URL
+            }
             res.send(hotel);
         } else {
             res.status(404).send({ error: 'Hotel not found' });
